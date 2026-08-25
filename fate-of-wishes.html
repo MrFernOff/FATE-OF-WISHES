@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fate of Wishes — Genshin Pull Planner</title>
+<style>
+:root{--bg:#090b12;--panel:#111622ee;--panel2:#171d2b;--line:#293246;--text:#f5f6fb;--muted:#8f99ad;--purple:#b47cff;--blue:#6dd4ff;--green:#5de0a3;--red:#ff7188;--gold:#ffd76a;--shadow:0 18px 55px #0008}
+*{box-sizing:border-box}body{margin:0;color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 50% -10%,#6c42a526,transparent 36%),radial-gradient(circle at 100% 30%,#3a8ab51a,transparent 30%),var(--bg)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1480px;margin:auto;padding:22px}.top{text-align:center;margin:4px 0 22px}.brand{font-family:Georgia,serif;font-size:38px;letter-spacing:2px;background:linear-gradient(90deg,#e8d7ff,#fff,#aee8ff);-webkit-background-clip:text;color:transparent;text-shadow:0 8px 30px #7e4bff33}.sub{color:var(--muted);margin-top:5px}.toolbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:10px}.btn:hover{border-color:#56617a}.primary{border:0;background:linear-gradient(135deg,#a76cff,#637fff)}.danger{color:#ff9aaa}.mode{display:flex;justify-content:center;margin:18px 0 14px}.mode select{background:var(--panel);color:#fff;border:1px solid var(--line);padding:11px 38px 11px 16px;border-radius:12px;min-width:280px}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:15px}.label{font-size:11px;color:var(--muted)}.value{font-size:24px;font-weight:800;margin-top:5px}.small{font-size:11px;color:var(--muted);margin-top:4px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) 400px;gap:14px;margin-top:14px}.card{padding:16px;margin-bottom:14px}.card h2{font-size:17px;margin:0;display:flex;align-items:center;gap:7px}.head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.nav{display:flex;align-items:center;gap:7px}.nav button{width:35px;height:35px;background:var(--panel2);color:#fff;border:1px solid var(--line);border-radius:9px}.month{min-width:190px;text-align:center;font-weight:750}.week,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.week div{text-align:center;color:var(--muted);font-size:10px;padding:5px}.day{min-height:104px;background:#0d111a;border:1px solid #20283a;border-radius:11px;padding:8px;position:relative;cursor:pointer}.day:hover,.day.sel{border-color:var(--purple)}.day.today{box-shadow:inset 0 0 0 1px var(--blue)}.day.empty{opacity:.2;cursor:default}.dot{position:absolute;right:8px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--purple)}.earn{color:var(--green);font-size:11px;margin-top:7px;display:flex;align-items:center;gap:3px}.spent{color:var(--red);font-size:11px;display:flex;align-items:center;gap:3px}.daynote{font-size:9px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted)}.field input,.field select,.field textarea{background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;outline:0}.field select{padding-right:34px}.field textarea{min-height:65px;resize:vertical}.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.quick button{border:1px solid var(--line);background:var(--panel2);color:#fff;padding:9px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:5px}.qgroup button{background:#101625}.qgroup button:hover{border-color:var(--green)}.qlabel{font-size:10px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}.qlabel:first-of-type{margin-top:2px}
+.planrow{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:12px}.planrow label{display:flex;align-items:center;gap:6px;cursor:pointer}.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;background:var(--panel2);color:var(--muted);padding:5px 13px;font-size:12px}.seg button.active{background:linear-gradient(135deg,#a76cff,#637fff);color:#fff}.planrow select{background:#090d15;color:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 26px 5px 8px;font-size:12px}
+select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%238f99ad" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');background-repeat:no-repeat;background-position:right 10px center;background-size:13px;cursor:pointer;transition:border-color .15s}
+select:hover{border-color:#56617a}
+select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #b47cff22}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:17px;height:17px;min-width:17px;border:1.5px solid var(--line);border-radius:5px;background:#090d15;cursor:pointer;position:relative;vertical-align:-3px;transition:.15s}
+input[type=checkbox]:hover{border-color:var(--purple)}
+input[type=checkbox]:checked{background:linear-gradient(135deg,#a76cff,#637fff);border-color:transparent}
+input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.banner{background:linear-gradient(135deg,#171b2b,#111722);border:1px solid var(--line);border-radius:14px;padding:14px}.bannername{font-size:21px;font-weight:850}.badge{font-size:9px;padding:4px 7px;border-radius:7px;background:#5de0a315;color:var(--green);border:1px solid #5de0a330;display:inline-flex;align-items:center;gap:4px}.estimated{color:var(--gold);background:#ffd76a12;border-color:#ffd76a30}.timer{font-size:25px;font-weight:850;margin:11px 0 2px}.bar{height:8px;background:#252c3b;border-radius:99px;overflow:hidden;margin:10px 0}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--blue));width:0}.row{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:12px}.row b{display:inline-flex;align-items:center;gap:4px}.target{background:#0d111a;border:1px solid var(--line);border-radius:11px;padding:11px;margin-bottom:8px}.target b{font-size:13px}.loglist{max-height:470px;overflow:auto;display:grid;gap:7px}.log{background:#0d111a;border:1px solid var(--line);border-radius:10px;padding:10px}.logtop{display:flex;justify-content:space-between;gap:8px}.logmeta{font-size:10px;color:var(--muted);margin-top:4px}.good{color:var(--green);display:inline-flex;align-items:center;gap:3px}.warn{color:var(--gold);display:inline-flex;align-items:center;gap:3px}.bad{color:var(--red);display:inline-flex;align-items:center;gap:3px}.ai{background:linear-gradient(135deg,#1a1630,#101722);border:1px solid #65449a;border-radius:14px;padding:13px}.ai h3{margin:0 0 8px;display:flex;align-items:center;gap:6px}.ai p{margin:5px 0;color:#cdd3df;font-size:12px}.ai p b{display:inline-flex;align-items:center;gap:3px}.footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}.toast{position:fixed;right:18px;bottom:18px;background:#1b2230;border:1px solid #46516a;padding:11px 14px;border-radius:10px;display:none;z-index:5}
+.icon{width:1em;height:1em;vertical-align:-.15em;display:inline-block;flex-shrink:0}.icon-lg{width:1.3em;height:1.3em;vertical-align:-.22em;filter:drop-shadow(0 0 6px #ffd76a70)}
+@media(max-width:1150px){.stats{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:650px){.wrap{padding:10px}.stats{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr}.full{grid-column:auto}.day{min-height:78px}.brand{font-size:29px}.timer{font-size:20px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eaf8ff"/><stop offset=".5" stop-color="var(--blue)"/><stop offset="1" stop-color="#3d7fb0"/></linearGradient>
+<linearGradient id="fateGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gold)"/><stop offset="1" stop-color="var(--red)"/></linearGradient>
+<linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="var(--gold)"/></linearGradient>
+<linearGradient id="targetGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--purple)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient>
+<linearGradient id="scrollGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecdcb2"/><stop offset="1" stop-color="var(--gold)"/></linearGradient>
+<linearGradient id="visionGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--purple)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient>
+<symbol id="i-gem" viewBox="0 0 24 24">
+<path d="M12 2 L20 9 L16 22 L8 22 L4 9 Z" fill="url(#gemGrad)"/>
+<path d="M12 2 L20 9 L12 12 Z" fill="#fff" opacity=".35"/>
+<path d="M4 9 L12 12 L8 22 Z" fill="#000" opacity=".14"/>
+<path d="M12 2 L4 9 L12 12 Z" fill="#fff" opacity=".2"/>
+<path d="M20 9 L16 22 L12 12 Z" fill="#000" opacity=".08"/>
+</symbol>
+<symbol id="i-fate" viewBox="0 0 24 24">
+<rect x="4" y="2.5" width="16" height="19" rx="2.2" fill="url(#fateGrad)"/>
+<circle cx="12" cy="9" r="3" fill="none" stroke="#fff" stroke-width="1.2" opacity=".9"/>
+<path d="M12 6 L12 12 M9 9 L15 9" stroke="#fff" stroke-width="1.1" opacity=".9"/>
+<path d="M7 15.5 H17 M7 18 H13.5" stroke="#fff" stroke-width="1" opacity=".55"/>
+</symbol>
+<symbol id="i-star" viewBox="0 0 24 24">
+<path d="M12 1 L14 10 L23 12 L14 14 L12 23 L10 14 L1 12 L10 10 Z" fill="url(#starGrad)"/>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 24 24">
+<path fill="currentColor" d="M12 8.6a3.4 3.4 0 100 6.8 3.4 3.4 0 000-6.8zm9 3.4a7 7 0 01-.12 1.28l2 1.55-1.9 3.3-2.36-.95a7.2 7.2 0 01-2.22 1.29l-.36 2.53H12.9l-.36-2.53a7.2 7.2 0 01-2.22-1.29l-2.36.95-1.9-3.3 2-1.55A7 7 0 018 12a7 7 0 01.12-1.28l-2-1.55 1.9-3.3 2.36.95a7.2 7.2 0 012.22-1.29L12.94 2h3.12l.36 2.53c.8.3 1.55.75 2.22 1.29l2.36-.95 1.9 3.3-2 1.55c.08.42.12.85.12 1.28z"/>
+</symbol>
+<symbol id="i-target" viewBox="0 0 24 24">
+<path fill="url(#targetGrad)" d="M12 2c4.42 0 8 3.58 8 8 0 6-8 12-8 12S4 16 4 10c0-4.42 3.58-8 8-8z"/>
+<circle cx="12" cy="10" r="3.1" fill="#fff" opacity=".92"/>
+</symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24">
+<path fill="url(#scrollGrad)" d="M5 3h11a3 3 0 013 3v13a2 2 0 01-2 2H7a3 3 0 01-3-3V5a2 2 0 012-2z"/>
+<path stroke="#0d111a" stroke-width="1.1" opacity=".55" stroke-linecap="round" d="M7 8h9M7 12h9M7 16h6"/>
+</symbol>
+<symbol id="i-vision" viewBox="0 0 24 24">
+<path fill="url(#visionGrad)" d="M12 2 L20 7 V17 L12 22 L4 17 V7 Z"/>
+<circle cx="12" cy="12" r="3.3" fill="#fff" opacity=".9"/>
+</symbol>
+<symbol id="i-lock" viewBox="0 0 24 24">
+<rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/>
+<path fill="none" stroke="currentColor" stroke-width="2" d="M8 11V8a4 4 0 018 0v3"/>
+</symbol>
+<symbol id="i-dice" viewBox="0 0 24 24">
+<rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" opacity=".18"/>
+<rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+<circle cx="8" cy="8" r="1.4" fill="currentColor"/><circle cx="16" cy="8" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="8" cy="16" r="1.4" fill="currentColor"/><circle cx="16" cy="16" r="1.4" fill="currentColor"/>
+</symbol>
+<symbol id="i-check" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15"/>
+<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M7 12.5l3 3 7-7"/>
+</symbol>
+<symbol id="i-warn" viewBox="0 0 24 24">
+<path fill="currentColor" opacity=".18" d="M12 2 L23 21 H1 Z"/>
+<path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M12 2 L23 21 H1 Z"/>
+<rect x="11" y="9" width="2" height="6" rx="1" fill="currentColor"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/>
+</symbol>
+<symbol id="i-diamond" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 2 L22 12 L12 22 L2 12 Z"/>
+</symbol>
+</defs>
+</svg>
+<div class="wrap">
+<header class="top">
+<div class="brand"><svg class="icon icon-lg"><use href="#i-star"/></svg> FATE OF WISHES <svg class="icon icon-lg"><use href="#i-star"/></svg></div>
+<div class="sub">Genshin Impact · Personal Pull Planner</div>
+</header>
+
+<div class="toolbar">
+<button class="btn primary" onclick="today()">Сегодня</button>
+<button class="btn" onclick="exportData()">Экспорт</button>
+<button class="btn" onclick="document.getElementById('file').click()">Импорт</button>
+<button class="btn danger" onclick="resetAll()">Сброс</button>
+<input id="file" type="file" accept=".json" hidden onchange="importData(event)">
+</div>
+
+<div class="mode">
+<select id="calcMode" onchange="setMode(this.value)">
+<option value="current">Текущий баннер</option>
+<option value="next">Следующий баннер</option>
+<option value="all">Все цели подряд</option>
+</select>
+<span class="small" id="bannerSrc" style="align-self:center;margin-left:8px"></span>
+</div>
+
+<section class="stats">
+<div class="stat"><div class="label">ПРИМОГЕМЫ</div><div class="value" id="gems">0</div><div class="small" id="pulls">0 круток</div></div>
+<div class="stat"><div class="label">ДО ЦЕЛИ</div><div class="value" id="remain">0</div><div class="small" id="remainPulls">0 круток</div></div>
+<div class="stat"><div class="label">СРЕДНИЙ ФАРМ</div><div class="value" id="avg">0</div><div class="small"><svg class="icon"><use href="#i-gem"/></svg> / день</div></div>
+<div class="stat"><div class="label">НУЖНО СЕЙЧАС</div><div class="value" id="need">0</div><div class="small"><svg class="icon"><use href="#i-gem"/></svg> / день</div></div>
+<div class="stat"><div class="label">ПОТРАЧЕНО</div><div class="value" id="spent">0</div><div class="small" id="spentGems">0</div></div>
+<div class="stat"><div class="label">PITY</div><div class="value" id="pity">0 / 90</div><div class="small" id="guar">50/50</div></div>
+</section>
+
+<div class="layout">
+<main>
+<section class="card">
+<div class="calendar-head">
+<div class="nav"><button onclick="month(-1)">‹</button><div class="month" id="month"></div><button onclick="month(1)">›</button></div>
+<button class="btn" onclick="today()">Сегодня</button>
+</div>
+<div class="week"><div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div></div>
+<div class="calendar" id="calendar"></div>
+</section>
+
+<section class="card">
+<div class="head"><h2>Запись за день</h2><span class="small" id="dateLabel"></span></div>
+
+<div class="qlabel">Сундуки</div>
+<div class="quick qgroup">
+<button onclick="quickEarn(1,'Сундук','Мелкий сундук')">+1 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(2,'Сундук','Обычный сундук')">+2 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(5,'Сундук','Роскошный сундук')">+5 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(10,'Сундук','Драгоценный сундук')">+10 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(20,'Сундук','Изысканный сундук')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
+</div>
+
+<div class="qlabel">Квесты и задания</div>
+<div class="quick qgroup">
+<button onclick="quickEarn(20,'Задание','Побочный квест')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(30,'Задание','Мировое задание')">+30 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(40,'Задание','Сюжетный квест')">+40 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(60,'Задание','Архонтский квест')">+60 <svg class="icon"><use href="#i-gem"/></svg></button>
+</div>
+
+<div class="qlabel">Другое</div>
+<div class="quick qgroup">
+<button onclick="quickEarn(10,'Дейлики','1 поручение')">+10 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(40,'Дейлики','Все поручения + бонус')">+40 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(50,'Ивент','Событие')">+50 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(100,'Боевой пропуск','Награда сезона')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
+</div>
+
+<div class="qlabel">Своя запись</div>
+<div class="form">
+<div class="field"><label>Дата</label><input id="date" type="date"></div>
+<div class="field"><label>Тип</label><select id="type"><option value="earn">Получил примогемы</option><option value="spend">Потратил крутки</option><option value="adjust">Изменение баланса</option></select></div>
+<div class="field"><label>Примогемы</label><input id="amount" type="number" placeholder="300"></div>
+<div class="field"><label>Крутки</label><input id="pullamount" type="number" value="0"></div>
+<div class="field full"><label>Название</label><input id="title" placeholder="Сундуки, квест, дейлики, событие..."></div>
+<div class="field full"><label>Заметка</label><textarea id="note" placeholder="Что именно сделал"></textarea></div>
+</div>
+<div class="quick"><button class="btn primary" onclick="addLog()">+ Добавить</button><button onclick="spend(1)">−1 <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(10)">−10 <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(90)">−90 <svg class="icon"><use href="#i-fate"/></svg></button></div>
+</section>
+
+<section class="card">
+<div class="head"><h2><svg class="icon"><use href="#i-scroll"/></svg> Подробный лог</h2><span class="small" id="logcount"></span></div>
+<div class="loglist" id="logs"></div>
+</section>
+</main>
+
+<aside>
+<section class="card">
+<div class="head"><h2><svg class="icon"><use href="#i-star"/></svg> Расчёт баннера</h2><span class="badge">LIVE</span></div>
+<div class="banner" id="active"></div>
+</section>
+
+<section class="card">
+<div class="head"><h2><svg class="icon"><use href="#i-vision"/></svg> Smart Farm</h2></div>
+<div class="ai" id="ai"></div>
+</section>
+
+<section class="card">
+<div class="head"><h2><svg class="icon"><use href="#i-gear"/></svg> Аккаунт</h2></div>
+<div class="form">
+<div class="field full"><label>Примогемы сейчас</label><input id="setgems" type="number"></div>
+<div class="field"><label>Pity</label><input id="setpity" type="number" min="0" max="89"></div>
+<div class="field"><label>5★ состояние</label><select id="setguar"><option value="true">Гарант</option><option value="false">50/50</option></select></div>
+</div>
+<button class="btn primary" style="width:100%;margin-top:10px" onclick="saveAccount()">Сохранить</button>
+</section>
+
+<section class="card">
+<div class="head"><h2><svg class="icon"><use href="#i-target"/></svg> Цели</h2></div>
+<div id="targets"></div>
+<button class="btn" style="width:100%" onclick="newTarget()">+ Добавить цель</button>
+</section>
+</aside>
+</div>
+
+<footer class="footer">Made by Fern with ♥</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY="fate_of_wishes_v3";
+const BANNER_API="https://api.ennead.cc/mihoyo/genshin/calendar?lang=ru-ru";
+const BANNER_CACHE_KEY="fow_banner_cache_v1";
+const FALLBACK_BANNERS=[
+{name:"Флинс + Инеффа",version:"7.0 · Phase 2",start:"2026-09-01T18:00:00+03:00",end:"2026-09-22T00:00:00+03:00",official:false,goal:90},
+{name:"Водяница",version:"7.1 · Phase 1",start:"2026-09-22T00:00:00+03:00",end:"2026-10-13T00:00:00+03:00",official:false,goal:90},
+{name:"Весна",version:"7.1 · Phase 2",start:"2026-10-13T00:00:00+03:00",end:"2026-11-03T00:00:00+03:00",official:false,goal:90}
+];
+function loadBannerCache(){
+ try{
+  let raw=JSON.parse(localStorage.getItem(BANNER_CACHE_KEY)||"null");
+  return (raw&&Array.isArray(raw.banners)&&raw.banners.length)?raw:null;
+ }catch{return null}
+}
+function saveBannerCache(list){try{localStorage.setItem(BANNER_CACHE_KEY,JSON.stringify({ts:Date.now(),banners:list}))}catch{}}
+
+let banners=(loadBannerCache()||{banners:FALLBACK_BANNERS}).banners;
+
+const base={gems:100,pity:25,guarantee:true,logs:[],mode:"current",bannerPlan:{},targets:banners.map((b,i)=>({id:i+1,name:b.name,start:b.start.slice(0,10),end:b.end.slice(0,10),goal:b.goal*160}))};
+let d=JSON.parse(localStorage.getItem(KEY)||"null")||base;
+if(!d.bannerPlan)d.bannerPlan={};
+let view=new Date(),selected=iso(new Date());
+
+const EL={
+ gems:document.getElementById("gems"),pulls:document.getElementById("pulls"),
+ remain:document.getElementById("remain"),remainPulls:document.getElementById("remainPulls"),
+ avg:document.getElementById("avg"),need:document.getElementById("need"),
+ spent:document.getElementById("spent"),spentGems:document.getElementById("spentGems"),
+ pity:document.getElementById("pity"),guar:document.getElementById("guar"),
+ active:document.getElementById("active"),ai:document.getElementById("ai"),
+ calendar:document.getElementById("calendar"),month:document.getElementById("month"),
+ logs:document.getElementById("logs"),logcount:document.getElementById("logcount"),
+ targets:document.getElementById("targets"),
+ date:document.getElementById("date"),dateLabel:document.getElementById("dateLabel"),
+ type:document.getElementById("type"),amount:document.getElementById("amount"),
+ pullamount:document.getElementById("pullamount"),title:document.getElementById("title"),
+ note:document.getElementById("note"),
+ setgems:document.getElementById("setgems"),setpity:document.getElementById("setpity"),
+ setguar:document.getElementById("setguar"),calcMode:document.getElementById("calcMode"),
+ toast:document.getElementById("toast"),bannerSrc:document.getElementById("bannerSrc")
+};
+
+function ic(name,cls){return `<svg class="icon${cls?" "+cls:""}"><use href="#i-${name}"/></svg>`}
+function iso(x){return new Date(x.getTime()-x.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function fmt(n){return Math.round(n).toLocaleString("ru-RU")}
+function save(){localStorage.setItem(KEY,JSON.stringify(d))}
+function toast(t){EL.toast.textContent=t;EL.toast.style.display="block";clearTimeout(toast._t);toast._t=setTimeout(()=>{EL.toast.style.display="none"},1600)}
+function esc(x){return String(x??"").replace(/[&<>"']/g,a=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[a]))}
+
+function upcomingBanners(){
+ let now=Date.now();
+ return banners.filter(b=>new Date(b.end).getTime()>now).sort((a,b)=>new Date(a.start)-new Date(b.start));
+}
+function targetForMode(){
+ let list=upcomingBanners();
+ if(!list.length)return null;
+ let now=Date.now();
+ if(d.mode==="next") return list[1]||list[0];
+ if(d.mode==="all") return {name:"Все цели подряд",start:list[0].start,end:list.at(-1).end,goal:list.reduce((s,b)=>s+b.goal,0),official:list.every(b=>b.official),all:true};
+ return list.find(b=>new Date(b.start).getTime()<=now)||list[0];
+}
+function currentBanner(){return targetForMode()}
+
+function bannerPlan(name){
+ if(!d.bannerPlan)d.bannerPlan={};
+ if(!d.bannerPlan[name])d.bannerPlan[name]={chars:1,const:0,weapon:false};
+ return d.bannerPlan[name];
+}
+function computeGoal(b){
+ let plan=bannerPlan(b.name);
+ let perChar=90*(1+plan.const);
+ return perChar*plan.chars+(plan.weapon?60:0);
+}
+function setPlan(idx,partial){
+ let b=banners[idx];if(!b)return;
+ Object.assign(bannerPlan(b.name),partial);
+ b.goal=computeGoal(b);
+ save();saveBannerCache(banners);
+ activeKey=null;render();
+}
+
+function groupConcurrentBanners(list){
+ let groups=[];
+ for(const b of list){
+  if(!Array.isArray(b.characters)||!b.characters.length)continue;
+  let match=groups.find(g=>g.start_time===b.start_time&&g.end_time===b.end_time);
+  if(match){match.characters=match.characters.concat(b.characters);match.weapons=(match.weapons||[]).concat(b.weapons||[])}
+  else groups.push({...b,characters:[...b.characters],weapons:[...(b.weapons||[])]});
+ }
+ return groups;
+}
+function bannerDisplayName(apiBanner){
+ let chars=apiBanner.characters||[];
+ let fivestars=chars.filter(c=>c.rarity===5).map(c=>c.name);
+ if(fivestars.length)return fivestars.join(" + ");
+ if(chars.length)return chars.map(c=>c.name).join(" + ");
+ return apiBanner.name||"Баннер";
+}
+function mapApiBanners(json){
+ return groupConcurrentBanners(json.banners||[])
+  .map(b=>{
+   let banner={name:bannerDisplayName(b),version:b.version?("Версия "+b.version):"",start:new Date(b.start_time*1000).toISOString(),end:new Date(b.end_time*1000).toISOString(),official:true};
+   banner.goal=computeGoal(banner);
+   return banner;
+  })
+  .sort((a,b)=>new Date(a.start)-new Date(b.start));
+}
+async function refreshBannersFromApi(){
+ try{
+  let res=await fetch(BANNER_API);
+  if(!res.ok)throw new Error("http "+res.status);
+  let json=await res.json();
+  let mapped=mapApiBanners(json);
+  if(!mapped.length)throw new Error("empty calendar");
+  banners=mapped;
+  saveBannerCache(banners);
+  activeKey=null;
+  render();
+ }catch(e){
+  console.warn("Banner calendar refresh failed, staying on cached/offline data:",e);
+  render();
+ }
+}
+
+let logStats={earned:0,spentPulls:0,avg:0};
+function refreshLogStats(){
+ let earned=0,spentPulls=0;const earnDays=new Set();
+ for(const x of d.logs){
+  if(x.type==="earn"){earned+=x.gems;earnDays.add(x.date)}
+  else if(x.type==="spend"){spentPulls+=x.pulls}
+ }
+ logStats={earned,spentPulls,avg:earnDays.size?earned/earnDays.size:0};
+}
+
+function countdown(end){
+ let ms=Math.max(0,new Date(end)-Date.now()),s=Math.floor(ms/1000),days=Math.floor(s/86400);s%=86400;
+ let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;
+ return `${days}д ${String(h).padStart(2,"0")}ч ${String(m).padStart(2,"0")}м ${String(s).padStart(2,"0")}с`;
+}
+
+function renderStats(){
+ refreshLogStats();
+ let b=currentBanner(),rem=Math.max(0,((b?.goal||0)*160)-d.gems),end=b?new Date(b.end):new Date(),days=Math.max((end-Date.now())/86400000,.01);
+ let need=rem/days;
+ EL.gems.textContent=fmt(d.gems);
+ EL.pulls.textContent=Math.floor(d.gems/160)+" круток";
+ EL.remain.textContent=fmt(rem);
+ EL.remainPulls.textContent=Math.ceil(rem/160)+" круток";
+ EL.avg.textContent=fmt(logStats.avg);
+ EL.need.textContent=fmt(need);
+ EL.spent.innerHTML=logStats.spentPulls+" "+ic("fate");
+ EL.spentGems.innerHTML=fmt(logStats.spentPulls*160)+" "+ic("gem");
+ EL.pity.textContent=d.pity+" / 90";
+ EL.guar.innerHTML=d.guarantee?ic("lock")+" Гарант":ic("dice")+" 50/50";
+}
+
+let activeKey=null,activeRefs=null;
+function renderActive(){
+ let b=currentBanner();if(!b)return;
+ let key=b.name+"|"+b.end+"|"+b.goal;
+ if(key!==activeKey){
+  activeKey=key;
+  let official=b.official?`<span class="badge">${ic("check")} OFFICIAL</span>`:`<span class="badge estimated">${ic("diamond")} ESTIMATED</span>`;
+  let idx=banners.indexOf(b);
+  let plan=(!b.all&&idx>-1)?bannerPlan(b.name):null;
+  let planHtml=plan?`<div class="planrow"><span>Персонажи</span><div class="seg"><button class="${plan.chars===1?"active":""}" onclick="setPlan(${idx},{chars:1})">1</button><button class="${plan.chars===2?"active":""}" onclick="setPlan(${idx},{chars:2})">2</button></div></div><div class="planrow"><span>Констелляции</span><select onchange="setPlan(${idx},{const:+this.value})">${[0,1,2,3,4,5,6].map(c=>`<option value="${c}"${plan.const===c?" selected":""}>C${c}</option>`).join("")}</select></div><div class="planrow"><label><input type="checkbox" onchange="setPlan(${idx},{weapon:this.checked})"${plan.weapon?" checked":""}> Нужна сигна?</label></div><div class="small">≈90 круток за копию перса, ×2 если оба, +90 за констелляцию, +60 за сигну (оценка)</div>`:"";
+  EL.active.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><div><div class="bannername">${esc(b.name)}</div><div class="small">${esc(b.version||"")}</div></div>${official}</div><div class="timer" id="timer"></div><div class="small">до конца баннера</div><div class="bar"><span id="bar"></span></div>${planHtml}<div class="row"><span>Цель</span><b>${b.goal} ${ic("fate")}</b></div><div class="row"><span>Нужно</span><b id="remNow"></b></div><div class="row"><span>Требуется сейчас</span><b id="needNow"></b></div>`;
+  activeRefs={timer:document.getElementById("timer"),bar:document.getElementById("bar"),remNow:document.getElementById("remNow"),needNow:document.getElementById("needNow")};
+ }
+ updateActiveTimer(b);
+ EL.bannerSrc.textContent=b.official?"":"офлайн-расписание";
+}
+function updateActiveTimer(b){
+ if(!activeRefs)return;
+ let rem=Math.max(0,b.goal*160-d.gems),ms=Math.max(0,new Date(b.end)-Date.now()),days=Math.max(ms/86400000,.01),need=rem/days;
+ let start=new Date(b.start),end=new Date(b.end),total=Math.max(1,end-start),progress=Math.min(100,Math.max(0,(Date.now()-start)/total*100));
+ activeRefs.timer.textContent=countdown(b.end);
+ activeRefs.bar.style.width=progress+"%";
+ activeRefs.remNow.innerHTML=`${fmt(rem)} ${ic("gem")}`;
+ activeRefs.needNow.innerHTML=`${fmt(need)} ${ic("gem")}/день`;
+}
+
+function renderAI(){
+ let b=currentBanner();if(!b)return;
+ let a=logStats.avg,ms=Math.max(0,new Date(b.end)-Date.now()),days=Math.max(ms/86400000,.01),rem=Math.max(0,b.goal*160-d.gems),need=rem/days;
+ let ratio=need?Math.min(100,a/need*100):100,extra=Math.max(0,a-need),text;
+ if(rem<=0)text="Цель уже покрыта. Можно сохранять ресурс для следующего баннера.";
+ else if(a===0)text="Пока нет истории фарма. Добавляй реальные дневные доходы — прогноз станет точнее.";
+ else if(a>=need)text=`Темп выше необходимого. Примерный запас: ${fmt(extra*days)} ${ic("gem")}.`;
+ else text=`Темп ниже необходимого примерно на ${fmt(need-a)} ${ic("gem")}/день.`;
+ let head=ratio>=100?`${ic("check")} УСПЕВАЕШЬ`:`${ic("warn")} НУЖНО УСКОРИТЬ ФАРМ`;
+ EL.ai.innerHTML=`<h3>${head}</h3><p>Твой средний темп: <b>${fmt(a)} ${ic("gem")}/день</b></p><p>Требуется: <b>${fmt(need)} ${ic("gem")}/день</b></p><p>Прогноз: <b>${Math.min(100,Math.round(ratio))}%</b> от нужного темпа</p><p>${text}</p>`;
+}
+
+function renderCalendar(){
+ let y=view.getFullYear(),m=view.getMonth(),first=new Date(y,m,1).getDay();first=first===0?6:first-1;
+ let daysInMonth=new Date(y,m+1,0).getDate();
+ let byDate=new Map();
+ for(const x of d.logs){
+  let g=byDate.get(x.date);
+  if(!g){g={count:0,earn:0,spend:0};byDate.set(x.date,g)}
+  g.count++;
+  if(x.type==="earn")g.earn+=x.gems;else if(x.type==="spend")g.spend+=x.pulls;
+ }
+ EL.month.textContent=new Date(y,m,1).toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+ let todayKey=iso(new Date());
+ let parts=new Array(first).fill('<div class="day empty"></div>');
+ for(let n=1;n<=daysInMonth;n++){
+  let key=iso(new Date(y,m,n)),g=byDate.get(key);
+  let cl="day"+(key===selected?" sel":"")+(key===todayKey?" today":"");
+  parts.push(`<div class="${cl}" onclick="selectDate('${key}')"><b>${n}</b>${g?'<i class="dot"></i>':""}${g&&g.earn?`<div class="earn">+${fmt(g.earn)} ${ic("gem")}</div>`:""}${g&&g.spend?`<div class="spent">−${g.spend} ${ic("fate")}</div>`:""}${g?`<div class="daynote">${g.count} записей</div>`:""}</div>`);
+ }
+ EL.calendar.innerHTML=parts.join("");
+}
+
+function renderLogs(){
+ let arr=[...d.logs].sort((a,b)=>b.id-a.id);
+ EL.logcount.textContent=arr.length+" записей";
+ EL.logs.innerHTML=arr.length?arr.map(x=>{
+  let v=x.type==="earn"?`<span class="good">+${fmt(x.gems)} ${ic("gem")}</span>`:x.type==="spend"?`<span class="bad">−${x.pulls} ${ic("fate")}</span>`:`<span class="warn">${fmt(x.gems)} ${ic("gem")}</span>`;
+  return `<div class="log"><div class="logtop"><b>${esc(x.title||"Операция")}</b><b>${v}<button class="btn" style="padding:2px 6px;margin-left:5px" onclick="delLog(${x.id})">×</button></b></div><div class="logmeta">${x.date}${x.note?" · "+esc(x.note):""}</div></div>`;
+ }).join(""):'<div class="small">История пока пустая.</div>';
+}
+
+function renderTargets(){
+ EL.targets.innerHTML=d.targets.map(t=>{
+  let r=Math.max(0,t.goal-d.gems),p=Math.min(100,d.gems/t.goal*100);
+  return `<div class="target"><div style="display:flex;justify-content:space-between"><b>${esc(t.name)}</b><span>${Math.ceil(t.goal/160)} ${ic("fate")}</span></div><div class="small">${t.start} → ${t.end}</div><div class="bar"><span style="width:${p}%"></span></div><div class="row"><span>${fmt(t.goal)} ${ic("gem")}</span><span>${fmt(r)} осталось</span></div></div>`;
+ }).join("");
+}
+
+function render(){
+ renderStats();renderActive();renderAI();renderCalendar();renderLogs();renderTargets();
+ EL.date.value=selected;EL.dateLabel.textContent=selected;
+ EL.setgems.value=d.gems;EL.setpity.value=d.pity;EL.setguar.value=String(d.guarantee);
+ EL.calcMode.value=d.mode;
+}
+function selectDate(x){selected=x;render()}
+
+function addLog(){
+ let type=EL.type.value,g=+EL.amount.value||0,p=+EL.pullamount.value||0;
+ if(type==="earn"&&g<=0)return toast("Укажи гемы");
+ if(type==="spend"&&p<=0)return toast("Укажи крутки");
+ if(type==="earn")d.gems+=g;
+ if(type==="spend"){d.gems=Math.max(0,d.gems-p*160);d.pity=(d.pity+p)%90}
+ if(type==="adjust")d.gems+=g;
+ d.logs.push({id:Date.now(),date:EL.date.value,type,gems:g,pulls:p,title:EL.title.value,note:EL.note.value});
+ save();
+ EL.amount.value="";EL.pullamount.value=0;EL.title.value="";EL.note.value="";
+ render();toast("Запись добавлена");
+}
+function spend(p){
+ let date=EL.date.value;
+ if(d.gems<p*160)return toast("Недостаточно примогемов");
+ d.gems-=p*160;d.pity=(d.pity+p)%90;
+ d.logs.push({id:Date.now(),date,type:"spend",gems:0,pulls:p,title:`Потрачено ${p} круток`,note:"Быстрая трата"});
+ save();render();toast(`−${p} круток`);
+}
+function quickEarn(amount,title,note){
+ let date=EL.date.value;
+ d.gems+=amount;
+ d.logs.push({id:Date.now(),date,type:"earn",gems:amount,pulls:0,title,note});
+ save();render();toast(`+${amount} — ${title}`);
+}
+function delLog(id){
+ let x=d.logs.find(a=>a.id===id);if(!x)return;
+ if(x.type==="earn")d.gems-=x.gems;
+ if(x.type==="spend"){d.gems+=x.pulls*160;d.pity=Math.max(0,d.pity-x.pulls)}
+ d.logs=d.logs.filter(a=>a.id!==id);save();render();
+}
+function saveAccount(){
+ d.gems=Math.max(0,+EL.setgems.value||0);
+ d.pity=Math.max(0,Math.min(89,+EL.setpity.value||0));
+ d.guarantee=EL.setguar.value==="true";
+ save();render();toast("Сохранено");
+}
+function setMode(x){d.mode=x;save();render()}
+function month(x){view.setMonth(view.getMonth()+x);renderCalendar()}
+function today(){let x=new Date();view=new Date(x);selected=iso(x);render()}
+function newTarget(){
+ let name=prompt("Название"),start=prompt("Начало YYYY-MM-DD"),end=prompt("Конец YYYY-MM-DD"),pulls=+prompt("Цель в крутках","90");
+ if(!name||!start||!end||!pulls)return;
+ d.targets.push({id:Date.now(),name,start,end,goal:pulls*160});save();render();
+}
+function exportData(){let a=document.createElement("a"),u=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));a.href=u;a.download="fate-of-wishes-backup.json";a.click();URL.revokeObjectURL(u)}
+function importData(e){
+ let f=e.target.files[0];if(!f)return;
+ let r=new FileReader();
+ r.onload=()=>{try{d=JSON.parse(r.result);activeKey=null;save();render();toast("Импортировано")}catch{toast("Ошибка файла")}};
+ r.readAsText(f);
+}
+function resetAll(){if(confirm("Удалить весь прогресс?")){localStorage.removeItem(KEY);location.reload()}}
+
+function quickTick(){let b=currentBanner();if(b)updateActiveTimer(b)}
+function fullTick(){renderStats();renderActive();renderAI()}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)fullTick()});
+window.addEventListener("focus",fullTick);
+setInterval(quickTick,1000);
+setInterval(fullTick,30000);
+
+render();
+refreshBannersFromApi();
+</script>
+</body>
+</html>
