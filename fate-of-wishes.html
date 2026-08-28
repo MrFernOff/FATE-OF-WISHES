@@ -353,8 +353,8 @@ function setTargetPlan(id,partial){
  save();render();
 }
 function planControlsHtml(plan,onchangeFn){
- let seg3=(field,val)=>[0,1,2].map(n=>`<button class="${val===n?"active":""}" onclick="${onchangeFn}({${field}:${n}})">${n}</button>`).join("");
- return `<div class="planrow"><span>Персонажи</span><div class="seg">${seg3("chars",plan.chars)}</div></div><div class="planrow"><span>Констелляции</span><select onchange="${onchangeFn}({const:+this.value})">${[0,1,2,3,4,5,6].map(c=>`<option value="${c}"${plan.const===c?" selected":""}>C${c}</option>`).join("")}</select></div><div class="planrow"><span>Сигна (шт.)</span><div class="seg">${seg3("weapons",plan.weapons)}</div></div><div class="planrow"><span>Рефайн сигны</span><select onchange="${onchangeFn}({refine:+this.value})">${[1,2,3,4,5].map(r=>`<option value="${r}"${plan.refine===r?" selected":""}>R${r}</option>`).join("")}</select></div>`;
+ let seg3=(field,val)=>[0,1,2].map(n=>`<button class="${val===n?"active":""}" onclick="${onchangeFn}{${field}:${n}})">${n}</button>`).join("");
+ return `<div class="planrow"><span>Персонажи</span><div class="seg">${seg3("chars",plan.chars)}</div></div><div class="planrow"><span>Констелляции</span><select onchange="${onchangeFn}{const:+this.value})">${[0,1,2,3,4,5,6].map(c=>`<option value="${c}"${plan.const===c?" selected":""}>C${c}</option>`).join("")}</select></div><div class="planrow"><span>Сигна (шт.)</span><div class="seg">${seg3("weapons",plan.weapons)}</div></div><div class="planrow"><span>Рефайн сигны</span><select onchange="${onchangeFn}{refine:+this.value})">${[1,2,3,4,5].map(r=>`<option value="${r}"${plan.refine===r?" selected":""}>R${r}</option>`).join("")}</select></div>`;
 }
 
 function groupConcurrentBanners(list){
