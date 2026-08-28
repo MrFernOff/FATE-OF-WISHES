@@ -131,10 +131,11 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="qlabel">Сундуки</div>
 <div class="quick qgroup">
 <button onclick="quickEarn(1,'Обычный сундук','Найден в мире')">+1 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(2,'Изысканный сундук','Найден в мире')">+2 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(2,'Обычный сундук','Найден в мире')">+2 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(5,'Драгоценный сундук','Найден в мире')">+5 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(10,'Роскошный сундук','Найден в мире')">+10 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(20,'Особый сундук','Квест/эвент')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(80,'Сокровищница','Открыто ключом')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
 </div>
 
 <div class="qlabel">Квесты и задания</div>
@@ -297,11 +298,25 @@ function currentLiveBanner(){
  let now=Date.now();
  return list.find(b=>new Date(b.start).getTime()<=now)||list[0];
 }
+function bannerTokens(name){return String(name||"").split(" + ").map(s=>s.trim().toLowerCase()).filter(Boolean)}
+function matchedLiveBanner(t){
+ let cur=currentLiveBanner();
+ if(!cur)return null;
+ if(cur.name===t.name)return cur;
+ let curTokens=bannerTokens(cur.name),tTokens=bannerTokens(t.name);
+ return tTokens.some(tok=>curTokens.includes(tok))?cur:null;
+}
+function isEffectivelyCurrent(b){
+ let cur=currentLiveBanner();
+ return d.mode==="current"||!!(b&&cur&&b.name===cur.name&&b.end===cur.end);
+}
 function targetForMode(){
  if(d.mode.startsWith("target:")){
   let id=+d.mode.slice(7);
   let t=d.targets.find(x=>x.id===id);
   if(!t)return null;
+  let linked=matchedLiveBanner(t);
+  if(linked)return linked;
   return {name:t.name,start:t.start,end:t.end,goal:t.goal/160,official:false,isTarget:true,targetId:t.id};
  }
  let list=upcomingBanners();
@@ -311,7 +326,8 @@ function targetForMode(){
 }
 function currentBanner(){return targetForMode()}
 function gemsForCalc(){
- if(d.mode!=="current"&&d.considerCurrent){
+ let b=currentBanner();
+ if(!isEffectivelyCurrent(b)&&d.considerCurrent){
   let cur=currentLiveBanner();
   if(cur)return Math.max(0,d.gems-cur.goal*160);
  }
@@ -525,10 +541,20 @@ function showMoreLogs(){logsShown+=15;renderLogs()}
 
 function renderTargets(){
  EL.targets.innerHTML=d.targets.length?d.targets.map(t=>{
+  let linked=matchedLiveBanner(t);
+  let plan,planHtml,badge="";
+  if(linked){
+   plan=bannerPlan(linked.name);
+   t.goal=computeGoalFromPlan(plan)*160;
+   let idx=banners.indexOf(linked);
+   planHtml=planControlsHtml(plan,`setPlan(${idx},`);
+   badge=`<span class="badge" style="margin-left:6px">${ic("check")} текущий баннер</span>`;
+  }else{
+   plan=normalizePlan(t.plan);
+   planHtml=planControlsHtml(plan,`setTargetPlan(${t.id},`);
+  }
   let r=Math.max(0,t.goal-d.gems),p=Math.min(100,d.gems/t.goal*100);
-  let plan=normalizePlan(t.plan);
-  let planHtml=planControlsHtml(plan,`setTargetPlan(${t.id},`);
-  return `<div class="target"><div style="display:flex;justify-content:space-between"><b>${esc(t.name)}</b><span>${Math.ceil(t.goal/160)} ${ic("fate")}<button class="btn" style="padding:1px 6px;margin-left:6px" onclick="delTarget(${t.id})">×</button></span></div><div class="small">${t.start} → ${t.end}</div><div class="bar"><span style="width:${p}%"></span></div><div class="row"><span>${fmt(t.goal)} ${ic("gem")}</span><span>${fmt(r)} осталось</span></div>${planHtml}</div>`;
+  return `<div class="target"><div style="display:flex;justify-content:space-between;align-items:center"><span><b>${esc(t.name)}</b>${badge}</span><span>${Math.ceil(t.goal/160)} ${ic("fate")}<button class="btn" style="padding:1px 6px;margin-left:6px" onclick="delTarget(${t.id})">×</button></span></div><div class="small">${t.start} → ${t.end}</div><div class="bar"><span style="width:${p}%"></span></div><div class="row"><span>${fmt(t.goal)} ${ic("gem")}</span><span>${fmt(r)} осталось</span></div>${planHtml}</div>`;
  }).join(""):'<div class="small">Целей пока нет.</div>';
 }
 function delTarget(id){
@@ -568,7 +594,7 @@ function render(){
  renderStats();renderActive();renderAI();renderCalendar();renderLogs();renderTargets();renderTargetPicker();
  EL.date.value=selected;EL.dateLabel.textContent=selected;
  EL.setgems.value=d.gems;EL.setpity.value=d.pity;EL.setguar.value=String(d.guarantee);
- EL.considerRow.style.display=d.mode==="current"?"none":"flex";
+ EL.considerRow.style.display=isEffectivelyCurrent(currentBanner())?"none":"flex";
  EL.considerCurrent.checked=!!d.considerCurrent;
  renderCurrentNote();
 }
