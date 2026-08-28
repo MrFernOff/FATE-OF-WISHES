@@ -8,7 +8,7 @@
 <style>
 :root{--bg:#090b12;--panel:#111622ee;--panel2:#171d2b;--line:#293246;--text:#f5f6fb;--muted:#8f99ad;--purple:#b47cff;--blue:#6dd4ff;--green:#5de0a3;--red:#ff7188;--gold:#ffd76a;--shadow:0 18px 55px #0008}
 *{box-sizing:border-box}body{margin:0;color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 50% -10%,#6c42a526,transparent 36%),radial-gradient(circle at 100% 30%,#3a8ab51a,transparent 30%),var(--bg)}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1480px;margin:auto;padding:22px}.top{text-align:center;margin:4px 0 22px}.brand{font-family:Georgia,serif;font-size:38px;letter-spacing:2px;background:linear-gradient(90deg,#e8d7ff,#fff,#aee8ff);-webkit-background-clip:text;color:transparent;text-shadow:0 8px 30px #7e4bff33}.sub{color:var(--muted);margin-top:5px}.brandRule{width:180px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}.brandRule::after{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:9px;background:var(--bg);padding:0 9px}.toolbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:10px}.btn:hover{border-color:#56617a}.primary{border:0;background:linear-gradient(135deg,#a76cff,#637fff)}.danger{color:#ff9aaa}.mode{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin:18px 0 6px}.mode select{background:var(--panel);color:#fff;border:1px solid var(--line);padding:11px 38px 11px 16px;border-radius:12px;min-width:280px}.considerRow{display:none;align-items:center;gap:7px;font-size:12px;color:var(--muted);cursor:pointer}.currentNote{text-align:center;margin:0 0 14px}.pickerSelect{width:100%;background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 34px 10px 12px;font-size:12px;margin-top:9px}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:15px}.label{font-size:11px;color:var(--muted)}.value{font-size:24px;font-weight:800;margin-top:5px}.small{font-size:11px;color:var(--muted);margin-top:4px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) 400px;gap:14px;margin-top:14px}.card{padding:16px;margin-bottom:14px}.card h2{font-size:17px;margin:0;display:flex;align-items:center;gap:7px}.head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;padding-bottom:10px;border-bottom:1px solid #ffd76a1a}.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.nav{display:flex;align-items:center;gap:7px}.nav button{width:35px;height:35px;background:var(--panel2);color:#fff;border:1px solid var(--line);border-radius:9px}.month{min-width:190px;text-align:center;font-weight:750}.week,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.week div{text-align:center;color:var(--muted);font-size:10px;padding:4px}.day{min-height:70px;background:#0d111a;border:1px solid #20283a;border-radius:10px;padding:6px;position:relative;cursor:pointer}.day:hover,.day.sel{border-color:var(--purple)}.day.today{box-shadow:inset 0 0 0 1px var(--blue)}.day.empty{opacity:.2;cursor:default}.dot{position:absolute;right:7px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--purple)}.earn{color:var(--green);font-size:9.5px;margin-top:4px;display:flex;align-items:center;gap:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.spent{color:var(--red);font-size:9.5px;display:flex;align-items:center;gap:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bmark{font-size:8.5px;margin-top:3px;padding:1px 4px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bmark.official{background:#6dd4ff1a;color:var(--blue)}.bmark.target{background:#ffd76a1a;color:var(--gold)}.bmark.start{background:transparent;border:1px dashed currentColor}.bmark.end{border:1px solid transparent}.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted)}.field input,.field select,.field textarea{background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;outline:0}.field select{padding-right:34px}.field textarea{min-height:65px;resize:vertical}.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.quick button{border:1px solid var(--line);background:var(--panel2);color:#fff;padding:9px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:5px}.qgroup button{background:#101625}.qgroup button:hover{border-color:var(--green)}.qlabel{font-size:10px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}.qlabel:first-of-type{margin-top:2px}.modalOverlay{display:none;position:fixed;inset:0;background:#04050ac0;backdrop-filter:blur(3px);z-index:20;align-items:center;justify-content:center;padding:16px}.modalOverlay.open{display:flex}.modalBox{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:20px;width:100%;max-width:380px;box-shadow:var(--shadow)}.modalBox h3{margin:0 0 14px;font-size:16px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1480px;margin:auto;padding:22px}.top{text-align:center;margin:4px 0 22px}.brand{font-family:Georgia,serif;font-size:38px;letter-spacing:2px;background:linear-gradient(90deg,#e8d7ff,#fff,#aee8ff);-webkit-background-clip:text;color:transparent;text-shadow:0 8px 30px #7e4bff33}.sub{color:var(--muted);margin-top:5px}.brandRule{width:180px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}.brandRule::after{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:9px;background:var(--bg);padding:0 9px}.toolbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:10px}.btn:hover{border-color:#56617a}.primary{border:0;background:linear-gradient(135deg,#a76cff,#637fff)}.danger{color:#ff9aaa}.mode{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin:18px 0 6px}.mode select{background:var(--panel);color:#fff;border:1px solid var(--line);padding:11px 38px 11px 16px;border-radius:12px;min-width:280px}.considerRow{display:none;align-items:center;gap:7px;font-size:12px;color:var(--muted);cursor:pointer}.currentNote{text-align:center;margin:0 0 14px}.pickerSelect{width:100%;background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 34px 10px 12px;font-size:12px;margin-top:9px}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:15px}.label{font-size:11px;color:var(--muted)}.value{font-size:24px;font-weight:800;margin-top:5px}.small{font-size:11px;color:var(--muted);margin-top:4px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) 400px;gap:14px;margin-top:14px}.card{padding:16px;margin-bottom:14px}.card h2{font-size:17px;margin:0;display:flex;align-items:center;gap:7px}.head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;padding-bottom:10px;border-bottom:1px solid #ffd76a1a}.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.nav{display:flex;align-items:center;gap:7px}.nav button{width:35px;height:35px;background:var(--panel2);color:#fff;border:1px solid var(--line);border-radius:9px}.month{min-width:190px;text-align:center;font-weight:750}.week,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.week div{text-align:center;color:var(--muted);font-size:10px;padding:4px}.day{min-height:70px;background:#0d111a;border:1px solid #20283a;border-radius:10px;padding:6px;position:relative;cursor:pointer}.day:hover,.day.sel{border-color:var(--purple)}.day.today{box-shadow:inset 0 0 0 1px var(--blue)}.day.empty{opacity:.2;cursor:default}.dot{position:absolute;right:7px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--purple)}.earn{color:var(--green);font-size:9.5px;margin-top:4px;display:flex;align-items:center;gap:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.spent{color:var(--red);font-size:9.5px;display:flex;align-items:center;gap:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bmark{font-size:8.5px;margin-top:3px;padding:1px 4px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bmark.official{background:#6dd4ff1a;color:var(--blue)}.bmark.target{background:#ffd76a1a;color:var(--gold)}.bmark.start{background:transparent;border:1px dashed currentColor}.bmark.end{border:1px solid transparent}.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted)}.field input,.field select,.field textarea{background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;outline:0}.field select{padding-right:34px}.field textarea{min-height:65px;resize:vertical}.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.quick button{border:1px solid var(--line);background:var(--panel2);color:#fff;padding:9px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:5px}.qgroup button{background:#101625}.qgroup button:hover{border-color:var(--green)}.qlabel{font-size:10px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}.qlabel:first-of-type{margin-top:2px}.modalOverlay{display:none;position:fixed;inset:0;background:#04050ac0;backdrop-filter:blur(3px);z-index:20;align-items:center;justify-content:center;padding:16px}.modalOverlay.open{display:flex}.modalBox{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:22px;width:100%;max-width:400px;box-shadow:var(--shadow)}.modalBox h3{margin:0 0 16px;font-size:17px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid #ffd76a1e}.dateBtn{width:100%;text-align:left;background:#090d15;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 11px;font-size:12.5px;display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;transition:border-color .15s}.dateBtn:hover{border-color:#56617a}.dateBtn.open{border-color:var(--purple)}.miniCal{display:none;margin-top:10px;background:#0a0e17;border:1px solid var(--line);border-radius:12px;padding:11px}.miniCal.open{display:block}.miniCalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:12px;font-weight:650;text-transform:capitalize}.miniCalHead button{width:26px;height:26px;background:var(--panel2);color:#fff;border:1px solid var(--line);border-radius:7px}.miniCalWeek{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}.miniCalWeek div{text-align:center;color:var(--muted);font-size:9px;padding:2px}.miniCalGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.mday{text-align:center;padding:6px 0;border-radius:7px;font-size:11.5px;cursor:pointer;background:#111622;transition:background .12s}.mday:hover{background:#1c2436}.mday.empty{visibility:hidden;cursor:default}.mday.today{box-shadow:inset 0 0 0 1px var(--blue)}.mday.sel{background:linear-gradient(135deg,#a76cff,#637fff);color:#fff}
 .planrow{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:12px}.planrow label{display:flex;align-items:center;gap:6px;cursor:pointer}.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;background:var(--panel2);color:var(--muted);padding:5px 13px;font-size:12px}.seg button.active{background:linear-gradient(135deg,#a76cff,#637fff);color:#fff}.planrow select{background:#090d15;color:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 26px 5px 8px;font-size:12px}
 select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%238f99ad" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');background-repeat:no-repeat;background-position:right 10px center;background-size:13px;cursor:pointer;transition:border-color .15s}
 select:hover{border-color:#56617a}
@@ -83,6 +83,13 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <symbol id="i-diamond" viewBox="0 0 24 24">
 <path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 2 L22 12 L12 22 L2 12 Z"/>
 </symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24">
+<rect x="3" y="4.5" width="18" height="16" rx="3" fill="url(#scrollGrad)"/>
+<rect x="3" y="4.5" width="18" height="5" rx="3" fill="var(--purple)" opacity=".55"/>
+<path stroke="#0d111a" stroke-width="1.1" opacity=".5" stroke-linecap="round" d="M7 13.5h2M11 13.5h2M15 13.5h2M7 17h2M11 17h2"/>
+<rect x="7" y="2" width="2" height="4.5" rx="1" fill="#fff" opacity=".85"/>
+<rect x="15" y="2" width="2" height="4.5" rx="1" fill="#fff" opacity=".85"/>
+</symbol>
 </defs>
 </svg>
 <div class="wrap">
@@ -132,10 +139,10 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="quick qgroup">
 <button onclick="quickEarn(1,'Обычный сундук','Найден в мире')">+1 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(2,'Обычный сундук','Найден в мире')">+2 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(5,'Драгоценный сундук','Найден в мире')">+5 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(5,'Богатый, Удивительный сундук','Найден в мире')">+5 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(10,'Роскошный сундук','Найден в мире')">+10 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(20,'Особый сундук','Квест/эвент')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(80,'Сокровищница','Открыто ключом')">+20 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(80,'Сокровищница','Открыто ключом')">+80 <svg class="icon"><use href="#i-gem"/></svg></button>
 </div>
 
 <div class="qlabel">Квесты и задания</div>
@@ -149,17 +156,15 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="qlabel">Дейлики и события</div>
 <div class="quick qgroup">
 <button onclick="quickEarn(10,'Дейлики','1 поручение')">+10 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(40,'Дейлики','Все поручения + бонус')">+40 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(50,'Ивент','Событие')">+50 <svg class="icon"><use href="#i-gem"/></svg></button>
+ <button onclick="quickEarn(60,'Дейлики','Все поручения + бонус')">+40 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(100,'Боевой пропуск','Награда сезона')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
 </div>
 
 <div class="qlabel">Бездна и Натиск</div>
 <div class="quick qgroup">
-<button onclick="quickEarn(50,'Бездна (частично)','Спиральная бездна')">+50 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(100,'Бездна (полный клир)','Спиральная бездна, 36★')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(50,'Натиск (частично)','Тенегубительный натиск')">+50 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(100,'Натиск (полный)','Тенегубительный натиск')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(150,'Натиск (частично)','Тенегубительный натиск')">+150 <svg class="icon"><use href="#i-gem"/></svg></button>
 </div>
 
 <div class="qlabel">Своя запись</div>
@@ -218,11 +223,16 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 
 <div class="modalOverlay" id="targetModalOverlay" onclick="if(event.target===this)closeTargetModal()">
 <div class="modalBox">
-<h3>Новая цель</h3>
+<h3><svg class="icon"><use href="#i-target"/></svg> Новая цель</h3>
 <div class="field full"><label>Название</label><input id="tmName" placeholder="Например: коплю на баннер"></div>
 <div class="form" style="margin-top:9px">
-<div class="field"><label>Начало</label><input id="tmStart" type="date"></div>
-<div class="field"><label>Конец</label><input id="tmEnd" type="date"></div>
+<div class="field"><label>Начало</label><button type="button" class="dateBtn" id="tmStartBtn" onclick="openMiniCal('start')"></button></div>
+<div class="field"><label>Конец</label><button type="button" class="dateBtn" id="tmEndBtn" onclick="openMiniCal('end')"></button></div>
+</div>
+<div class="miniCal" id="miniCal">
+<div class="miniCalHead"><button type="button" onclick="miniCalNav(-1)">‹</button><span id="miniCalLabel"></span><button type="button" onclick="miniCalNav(1)">›</button></div>
+<div class="miniCalWeek"><div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div></div>
+<div class="miniCalGrid" id="miniCalGrid"></div>
 </div>
 <div class="field full" style="margin-top:9px"><label>Цель в крутках</label><input id="tmGoal" type="number" min="1" value="90"></div>
 <div class="quick" style="margin-top:16px">
@@ -278,7 +288,8 @@ const EL={
  considerRow:document.getElementById("considerRow"),considerCurrent:document.getElementById("considerCurrent"),
  currentNote:document.getElementById("currentNote"),targetPicker:document.getElementById("targetPicker"),
  targetModalOverlay:document.getElementById("targetModalOverlay"),tmName:document.getElementById("tmName"),
- tmStart:document.getElementById("tmStart"),tmEnd:document.getElementById("tmEnd"),tmGoal:document.getElementById("tmGoal")
+ tmStartBtn:document.getElementById("tmStartBtn"),tmEndBtn:document.getElementById("tmEndBtn"),tmGoal:document.getElementById("tmGoal"),
+ miniCal:document.getElementById("miniCal"),miniCalLabel:document.getElementById("miniCalLabel"),miniCalGrid:document.getElementById("miniCalGrid")
 };
 
 function ic(name,cls){return `<svg class="icon${cls?" "+cls:""}"><use href="#i-${name}"/></svg>`}
@@ -645,19 +656,62 @@ function saveAccount(){
 }
 function setMode(x){d.mode=x;save();render()}
 function month(x){view.setMonth(view.getMonth()+x);renderCalendar()}
+let tmVal={start:iso(new Date()),end:iso(new Date(Date.now()+21*86400000))};
+let miniCalField=null,miniCalView=new Date();
+function fmtDateHuman(isoStr){
+ return new Date(isoStr+"T00:00:00").toLocaleDateString("ru-RU",{day:"2-digit",month:"long",year:"numeric"});
+}
+function refreshDateButtons(){
+ EL.tmStartBtn.innerHTML=`${fmtDateHuman(tmVal.start)} ${ic("calendar")}`;
+ EL.tmEndBtn.innerHTML=`${fmtDateHuman(tmVal.end)} ${ic("calendar")}`;
+}
+function openMiniCal(field){
+ miniCalField=field;
+ miniCalView=new Date(tmVal[field]+"T00:00:00");
+ EL.tmStartBtn.classList.toggle("open",field==="start");
+ EL.tmEndBtn.classList.toggle("open",field==="end");
+ EL.miniCal.classList.add("open");
+ renderMiniCal();
+}
+function closeMiniCal(){
+ EL.miniCal.classList.remove("open");
+ EL.tmStartBtn.classList.remove("open");
+ EL.tmEndBtn.classList.remove("open");
+ miniCalField=null;
+}
+function miniCalNav(delta){miniCalView.setMonth(miniCalView.getMonth()+delta);renderMiniCal()}
+function renderMiniCal(){
+ let y=miniCalView.getFullYear(),m=miniCalView.getMonth();
+ EL.miniCalLabel.textContent=new Date(y,m,1).toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+ let first=new Date(y,m,1).getDay();first=first===0?6:first-1;
+ let daysInMonth=new Date(y,m+1,0).getDate();
+ let todayKey=iso(new Date()),selKey=tmVal[miniCalField];
+ let parts=new Array(first).fill('<div class="mday empty"></div>');
+ for(let n=1;n<=daysInMonth;n++){
+  let key=iso(new Date(y,m,n));
+  let cl="mday"+(key===selKey?" sel":"")+(key===todayKey?" today":"");
+  parts.push(`<div class="${cl}" onclick="pickMiniCalDate('${key}')">${n}</div>`);
+ }
+ EL.miniCalGrid.innerHTML=parts.join("");
+}
+function pickMiniCalDate(key){
+ tmVal[miniCalField]=key;
+ refreshDateButtons();
+ closeMiniCal();
+}
 function newTarget(){
  EL.tmName.value="";
- EL.tmStart.value=iso(new Date());
- EL.tmEnd.value=iso(new Date(Date.now()+21*86400000));
+ tmVal={start:iso(new Date()),end:iso(new Date(Date.now()+21*86400000))};
+ refreshDateButtons();
+ closeMiniCal();
  EL.tmGoal.value=90;
  EL.targetModalOverlay.classList.add("open");
  EL.tmName.focus();
 }
-function closeTargetModal(){EL.targetModalOverlay.classList.remove("open")}
+function closeTargetModal(){EL.targetModalOverlay.classList.remove("open");closeMiniCal()}
 function submitTargetModal(){
- let name=EL.tmName.value.trim(),start=EL.tmStart.value,end=EL.tmEnd.value,pulls=+EL.tmGoal.value||0;
+ let name=EL.tmName.value.trim(),start=tmVal.start,end=tmVal.end,pulls=+EL.tmGoal.value||0;
  if(!name)return toast("Укажи название");
- if(!start||!end)return toast("Укажи даты");
  if(new Date(end)<new Date(start))return toast("Конец раньше начала");
  if(pulls<=0)return toast("Укажи цель в крутках");
  d.targets.push({id:Date.now(),name,start,end,goal:pulls*160});
