@@ -119,8 +119,7 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="stat"><div class="label">СРЕДНИЙ ФАРМ</div><div class="value" id="avg">0</div><div class="small"><svg class="icon"><use href="#i-gem"/></svg> / день</div></div>
 <div class="stat"><div class="label">НУЖНО СЕЙЧАС</div><div class="value" id="need">0</div><div class="small"><svg class="icon"><use href="#i-gem"/></svg> / день</div></div>
 <div class="stat"><div class="label">ПОТРАЧЕНО</div><div class="value" id="spent">0</div><div class="small" id="spentGems">0</div></div>
-<div class="stat"><div class="label">ПЕРСОНАЖ · PITY</div><div class="value" id="pity">0 / 90</div><div class="small" id="guar">50/50</div></div>
-<div class="stat"><div class="label">СИГНА · PITY</div><div class="value" id="weaponPity">0 / 80</div><div class="small" id="weaponGuar">Не гарант</div></div>
+<div class="stat"><div class="label">КРУТКИ ДО ГАРАНТА</div><div class="value" id="pity">0 / 90</div><div class="small" id="guar">50/50</div></div>
 </section>
 
 <div class="layout">
@@ -147,9 +146,7 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <button onclick="quickEarn(40,'Получил гемы','')">+40 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(50,'Получил гемы','')">+50 <svg class="icon"><use href="#i-gem"/></svg></button>
 <button onclick="quickEarn(60,'Получил гемы','')">+60 <svg class="icon"><use href="#i-gem"/></svg></button>
- <button onclick="quickEarn(80,'Сокровищница','')">+80 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(100,'Бездна,Ивент','')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
-<button onclick="quickEarn(150,'Натиск','')">+150 <svg class="icon"><use href="#i-gem"/></svg></button>
+<button onclick="quickEarn(100,'Получил гемы','')">+100 <svg class="icon"><use href="#i-gem"/></svg></button>
 </div>
 
 <div class="qlabel">Своя запись</div>
@@ -157,12 +154,11 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="field"><label>Дата</label><input id="date" type="date"></div>
 <div class="field"><label>Тип</label><select id="type"><option value="earn">Получил примогемы</option><option value="spend">Потратил крутки</option><option value="adjust">Изменение баланса</option></select></div>
 <div class="field"><label>Примогемы</label><input id="amount" type="number" placeholder="300"></div>
-<div class="field"><label>Тип баннера</label><select id="pullType"><option value="character">Персонаж</option><option value="weapon">Сигна</option></select></div>
 <div class="field"><label>Крутки</label><input id="pullamount" type="number" value="0"></div>
 <div class="field full"><label>Название</label><input id="title" placeholder="Сундуки, квест, дейлики, событие..."></div>
 <div class="field full"><label>Заметка</label><textarea id="note" placeholder="Что именно сделал"></textarea></div>
 </div>
-<div class="quick"><button class="btn primary" onclick="addLog()">+ Добавить</button><button onclick="spend(1,'character')">−1 персонаж <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(10,'character')">−10 персонаж <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(90,'character')">−90 персонаж <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(1,'weapon')">−1 сигна <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(10,'weapon')">−10 сигна <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(80,'weapon')">−80 сигна <svg class="icon"><use href="#i-fate"/></svg></button></div>
+<div class="quick"><button class="btn primary" onclick="addLog()">+ Добавить</button><button onclick="spend(1)">−1 <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(10)">−10 <svg class="icon"><use href="#i-fate"/></svg></button><button onclick="spend(90)">−90 <svg class="icon"><use href="#i-fate"/></svg></button></div>
 </section>
 
 <section class="card">
@@ -186,10 +182,8 @@ input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1p
 <div class="head"><h2><svg class="icon"><use href="#i-gear"/></svg> Аккаунт</h2></div>
 <div class="form">
 <div class="field full"><label>Примогемы сейчас</label><input id="setgems" type="number"></div>
-<div class="field"><label>Персонаж · круток без 5★</label><input id="setpity" type="number" min="0" max="89"></div>
-<div class="field"><label>Персонаж · 5★</label><select id="setguar"><option value="true">Гарант</option><option value="false">50/50</option></select></div>
-<div class="field"><label>Сигна · круток без 5★</label><input id="setWeaponPity" type="number" min="0" max="79"></div>
-<div class="field"><label>Сигна · состояние</label><select id="setWeaponGuar"><option value="true">Гарант выбранной</option><option value="false">Не гарант</option></select></div>
+<div class="field"><label>Круток без 5★</label><input id="setpity" type="number" min="0" max="89"></div>
+<div class="field"><label>5★ состояние</label><select id="setguar"><option value="true">Гарант</option><option value="false">50/50</option></select></div>
 </div>
 <button class="btn primary" style="width:100%;margin-top:10px" onclick="saveAccount()">Сохранить</button>
 </section>
@@ -235,7 +229,7 @@ const KEY="fate_of_wishes_v3";
 const BANNER_API="https://api.ennead.cc/mihoyo/genshin/calendar?lang=ru-ru";
 const BANNER_CACHE_KEY="fow_banner_cache_v1";
 const FALLBACK_BANNERS=[
-{name:"Флинс + Инеффа",version:"7.0 · Phase 2",start:"2026-09-01T18:00:00+03:00",end:"2026-09-22T00:00:00+03:00",official:true,goal:90},
+{name:"Флинс + Инеффа",version:"7.0 · Phase 2",start:"2026-09-01T18:00:00+03:00",end:"2026-09-22T00:00:00+03:00",official:false,goal:90},
 {name:"Водяница",version:"7.1 · Phase 1",start:"2026-09-22T00:00:00+03:00",end:"2026-10-13T00:00:00+03:00",official:false,goal:90},
 {name:"Весна",version:"7.1 · Phase 2",start:"2026-10-13T00:00:00+03:00",end:"2026-11-03T00:00:00+03:00",official:false,goal:90}
 ];
@@ -249,17 +243,10 @@ function saveBannerCache(list){try{localStorage.setItem(BANNER_CACHE_KEY,JSON.st
 
 let banners=(loadBannerCache()||{banners:FALLBACK_BANNERS}).banners;
 
-const base={gems:100,pity:25,guarantee:true,weaponPity:0,weaponGuarantee:false,logs:[],mode:"current",bannerPlan:{},considerCurrent:false,targets:banners.map((b,i)=>({id:i+1,name:b.name,start:b.start.slice(0,10),end:b.end.slice(0,10),goal:b.goal*160}))};
+const base={gems:100,pity:25,guarantee:true,logs:[],mode:"current",bannerPlan:{},considerCurrent:false,targets:banners.map((b,i)=>({id:i+1,name:b.name,start:b.start.slice(0,10),end:b.end.slice(0,10),goal:b.goal*160}))};
 let d=JSON.parse(localStorage.getItem(KEY)||"null")||base;
 if(!d.bannerPlan)d.bannerPlan={};
 if(d.considerCurrent==null)d.considerCurrent=false;
-if(d.guarantee==null)d.guarantee=false;
-if(d.weaponPity==null)d.weaponPity=0;
-if(d.weaponGuarantee==null)d.weaponGuarantee=false;
-d.weaponPity=Math.max(0,Math.min(79,+d.weaponPity||0));
-if(!Array.isArray(d.targets))d.targets=[];
-d.targets.forEach(t=>{if(t.plan)normalizePlan(t.plan)});
-d.logs.forEach(x=>{if(x.type==="spend"&&x.pullType==null)x.pullType="character"});
 if(d.mode==="all")d.mode="current";
 let view=new Date(),selected=iso(new Date());
 
@@ -268,17 +255,17 @@ const EL={
  remain:document.getElementById("remain"),remainPulls:document.getElementById("remainPulls"),
  avg:document.getElementById("avg"),need:document.getElementById("need"),
  spent:document.getElementById("spent"),spentGems:document.getElementById("spentGems"),
- pity:document.getElementById("pity"),guar:document.getElementById("guar"),weaponPity:document.getElementById("weaponPity"),weaponGuar:document.getElementById("weaponGuar"),
+ pity:document.getElementById("pity"),guar:document.getElementById("guar"),
  active:document.getElementById("active"),ai:document.getElementById("ai"),
  calendar:document.getElementById("calendar"),month:document.getElementById("month"),
  logs:document.getElementById("logs"),logcount:document.getElementById("logcount"),
  targets:document.getElementById("targets"),
  date:document.getElementById("date"),dateLabel:document.getElementById("dateLabel"),
  type:document.getElementById("type"),amount:document.getElementById("amount"),
- pullamount:document.getElementById("pullamount"),pullType:document.getElementById("pullType"),title:document.getElementById("title"),
+ pullamount:document.getElementById("pullamount"),title:document.getElementById("title"),
  note:document.getElementById("note"),
- setgems:document.getElementById("setgems"),setpity:document.getElementById("setpity"),setWeaponPity:document.getElementById("setWeaponPity"),
- setguar:document.getElementById("setguar"),setWeaponGuar:document.getElementById("setWeaponGuar"),calcMode:document.getElementById("calcMode"),
+ setgems:document.getElementById("setgems"),setpity:document.getElementById("setpity"),
+ setguar:document.getElementById("setguar"),calcMode:document.getElementById("calcMode"),
  toast:document.getElementById("toast"),bannerSrc:document.getElementById("bannerSrc"),
  considerRow:document.getElementById("considerRow"),considerCurrent:document.getElementById("considerCurrent"),
  currentNote:document.getElementById("currentNote"),targetPicker:document.getElementById("targetPicker"),
@@ -326,7 +313,7 @@ function targetForMode(){
   if(!t)return null;
   let linked=matchedLiveBanner(t);
   if(linked)return linked;
-  return {name:t.name,start:t.start,end:t.end,goal:targetRequiredPulls(t),official:false,isTarget:true,targetId:t.id};
+  return {name:t.name,start:t.start,end:t.end,goal:t.goal/160,official:false,isTarget:true,targetId:t.id};
  }
  let list=upcomingBanners();
  if(!list.length)return null;
@@ -334,36 +321,30 @@ function targetForMode(){
  return currentLiveBanner();
 }
 function currentBanner(){return targetForMode()}
-function currentBannerPulls(){
- let cur=currentLiveBanner();
- if(!cur)return 0;
- return requiredPullsForPlan(bannerPlan(cur.name));
-}
 function gemsForCalc(){
  let b=currentBanner();
  if(!isEffectivelyCurrent(b)&&d.considerCurrent){
-  let currentNeed=currentBannerPulls()*160;
-  return Math.max(0,d.gems-currentNeed);
+  let cur=currentLiveBanner();
+  if(cur)return Math.max(0,d.gems-cur.goal*160);
  }
  return d.gems;
 }
-function targetRequiredPulls(t){
- if(t&&t.plan)return requiredPullsForPlan(normalizePlan(t.plan));
- return Math.max(0,Math.ceil((t?.goal||0)/160));
+function pullsSpentInRange(startISO,endISO){
+ let s=new Date(startISO).getTime(),e=new Date(endISO).getTime(),sum=0;
+ for(const x of d.logs){
+  if(x.type!=="spend")continue;
+  let t=new Date(x.date).getTime();
+  if(t>=s&&t<=e)sum+=x.pulls;
+ }
+ return sum;
 }
 function remainingNeed(b){
  if(!b)return{rem:0,need:0,spentPulls:0,remainingPulls:0};
- let remainingPulls;
- if(b.isTarget){
-  let t=d.targets.find(x=>x.id===b.targetId);
-  remainingPulls=targetRequiredPulls(t);
- }else{
-  remainingPulls=requiredPullsForPlan(bannerPlan(b.name));
- }
+ let spentPulls=pullsSpentInRange(b.start,b.end);
+ let remainingPulls=Math.max(0,b.goal-spentPulls);
  let rem=Math.max(0,remainingPulls*160-gemsForCalc());
  let days=Math.max((new Date(b.end)-Date.now())/86400000,.01);
- let coveredPulls=Math.min(remainingPulls,Math.floor(gemsForCalc()/160));
- return{rem,need:rem/days,spentPulls:coveredPulls,remainingPulls};
+ return{rem,need:rem/days,spentPulls,remainingPulls};
 }
 
 function normalizePlan(plan){
@@ -381,34 +362,11 @@ function bannerPlan(name){
  if(!d.bannerPlan[name])d.bannerPlan[name]={chars:1,const:0,weapons:0,refine:1};
  return normalizePlan(d.bannerPlan[name]);
 }
-function characterPullsForCopies(copies,applyPity=true){
- if(copies<=0)return 0;
- let firstPity=applyPity?Math.max(0,90-d.pity):90;
- let firstFeaturedCost=d.guarantee?firstPity:firstPity+90;
- return firstFeaturedCost+Math.max(0,copies-1)*90;
-}
-function weaponPullsForCopies(copies,applyPity=true){
- if(copies<=0)return 0;
- let firstPity=applyPity?Math.max(0,80-d.weaponPity):80;
- let firstWeaponCost=d.weaponGuarantee?firstPity:firstPity+80;
- return firstWeaponCost+Math.max(0,copies-1)*80;
-}
-function computeGoalFromPlan(plan,applyPity=true){
- plan=normalizePlan(plan);
+function computeGoalFromPlan(plan,applyPity){
  let copies=plan.chars*(1+plan.const);
- let charPulls=characterPullsForCopies(copies,applyPity);
- let weaponCopies=plan.weapons*plan.refine;
- let weaponPulls=weaponPullsForCopies(weaponCopies,applyPity);
+ let charPulls=copies>0?(applyPity?Math.max(0,90-d.pity):90)+Math.max(0,copies-1)*90:0;
+ let weaponPulls=60*plan.refine*plan.weapons;
  return charPulls+weaponPulls;
-}
-function requiredPullsForPlan(plan){
- return computeGoalFromPlan(plan,true);
-}
-function requiredCharacterPulls(plan){
- return characterPullsForCopies(plan.chars*(1+plan.const),true);
-}
-function requiredWeaponPulls(plan){
- return weaponPullsForCopies(plan.weapons*plan.refine,true);
 }
 function computeGoal(b){return computeGoalFromPlan(bannerPlan(b.name),isLiveBanner(b))}
 function setPlan(idx,partial){
@@ -501,8 +459,6 @@ function renderStats(){
  EL.spentGems.innerHTML=fmt(logStats.spentPulls*160)+" "+ic("gem");
  EL.pity.textContent=d.pity+" / 90";
  EL.guar.innerHTML=d.guarantee?ic("lock")+" Гарант":ic("dice")+" 50/50";
- EL.weaponPity.textContent=d.weaponPity+" / 80";
- EL.weaponGuar.innerHTML=d.weaponGuarantee?ic("lock")+" Гарант выбранной":ic("dice")+" Не гарант";
 }
 
 let activeKey=null,activeRefs=null;
@@ -515,9 +471,9 @@ function renderActive(){
   let official=b.official?`<span class="badge">${ic("check")} OFFICIAL</span>`:`<span class="badge estimated">${ic("diamond")} ESTIMATED</span>`;
   let idx=banners.indexOf(b);
   let plan=idx>-1?bannerPlan(b.name):null;
-  let planHtml=plan?planControlsHtml(plan,`setPlan(${idx},`)+`<div class="small">90 круток/5★ персонажа · 80 круток/5★ сигны · pity считается отдельно</div>`:"";
+  let planHtml=plan?planControlsHtml(plan,`setPlan(${idx},`)+`<div class="small">90 круток/копия перса за C0, +90 за констелляцию · 60 круток/копия сигны за R1, +60 за рефайн (оценка)</div>`:"";
   let nextNotice=(d.mode==="next"&&!hasNextBanner())?`<div class="small" style="color:var(--gold);margin-bottom:8px">Следующий баннер календарём ещё не анонсирован — показан текущий</div>`:"";
-  EL.active.innerHTML=`${nextNotice}<div style="display:flex;justify-content:space-between;gap:8px"><div><div class="bannername">${esc(b.name)}</div><div class="small">${esc(b.version||"")}</div></div>${official}</div><div class="timer" id="timer"></div><div class="small">до конца баннера</div><div class="bar"><span id="bar"></span></div>${planHtml}<div class="row"><span>Персонажи</span><b>${requiredCharacterPulls(plan||bannerPlan(b.name))} ${ic("fate")}</b></div><div class="row"><span>Сигны</span><b>${requiredWeaponPulls(plan||bannerPlan(b.name))} ${ic("fate")}</b></div><div class="row"><span>Всего</span><b>${requiredPullsForPlan(plan||bannerPlan(b.name))} ${ic("fate")}</b></div><div class="row" id="spentRow" style="display:none"><span>Уже потрачено</span><b id="spentOnBanner"></b></div><div class="row"><span>Нужно</span><b id="remNow"></b></div><div class="row"><span>Требуется сейчас</span><b id="needNow"></b></div>`;
+  EL.active.innerHTML=`${nextNotice}<div style="display:flex;justify-content:space-between;gap:8px"><div><div class="bannername">${esc(b.name)}</div><div class="small">${esc(b.version||"")}</div></div>${official}</div><div class="timer" id="timer"></div><div class="small">до конца баннера</div><div class="bar"><span id="bar"></span></div>${planHtml}<div class="row"><span>Цель</span><b>${b.goal} ${ic("fate")}</b></div><div class="row" id="spentRow" style="display:none"><span>Уже потрачено</span><b id="spentOnBanner"></b></div><div class="row"><span>Нужно</span><b id="remNow"></b></div><div class="row"><span>Требуется сейчас</span><b id="needNow"></b></div>`;
   activeRefs={timer:document.getElementById("timer"),bar:document.getElementById("bar"),remNow:document.getElementById("remNow"),needNow:document.getElementById("needNow"),spentRow:document.getElementById("spentRow"),spentOnBanner:document.getElementById("spentOnBanner")};
  }
  updateActiveTimer(b);
@@ -615,11 +571,8 @@ function renderTargets(){
    plan=normalizePlan(t.plan);
    planHtml=planControlsHtml(plan,`setTargetPlan(${t.id},`);
   }
-  let targetPulls=targetRequiredPulls(t);
-  let targetGems=targetPulls*160;
-  let r=Math.max(0,targetGems-d.gems);
-  let p=Math.min(100,targetGems?d.gems/targetGems*100:100);
-  return `<div class="target"><div style="display:flex;justify-content:space-between;align-items:center"><span><b>${esc(t.name)}</b>${badge}</span><span>${targetPulls} ${ic("fate")}<button class="btn" style="padding:1px 6px;margin-left:6px" onclick="delTarget(${t.id})">×</button></span></div><div class="small">${t.start} → ${t.end}</div><div class="bar"><span style="width:${p}%"></span></div><div class="row"><span>${fmt(targetGems)} ${ic("gem")}</span><span>${fmt(r)} осталось</span></div><div class="small">Персонажи: ${requiredCharacterPulls(plan)} ${ic("fate")} · Сигны: ${requiredWeaponPulls(plan)} ${ic("fate")}</div>${planHtml}</div>`;
+  let r=Math.max(0,t.goal-d.gems),p=Math.min(100,d.gems/t.goal*100);
+  return `<div class="target"><div style="display:flex;justify-content:space-between;align-items:center"><span><b>${esc(t.name)}</b>${badge}</span><span>${Math.ceil(t.goal/160)} ${ic("fate")}<button class="btn" style="padding:1px 6px;margin-left:6px" onclick="delTarget(${t.id})">×</button></span></div><div class="small">${t.start} → ${t.end}</div><div class="bar"><span style="width:${p}%"></span></div><div class="row"><span>${fmt(t.goal)} ${ic("gem")}</span><span>${fmt(r)} осталось</span></div>${planHtml}</div>`;
  }).join(""):'<div class="small">Целей пока нет.</div>';
 }
 function delTarget(id){
@@ -638,7 +591,7 @@ function addTargetFromBanner(){
  let b=upcomingBanners().find(x=>x.name===name);
  if(!b)return;
  let plan={...bannerPlan(b.name)};
- d.targets.push({id:Date.now(),name:b.name,start:b.start.slice(0,10),end:b.end.slice(0,10),goal:computeGoalFromPlan(plan,false)*160,plan});
+ d.targets.push({id:Date.now(),name:b.name,start:b.start.slice(0,10),end:b.end.slice(0,10),goal:b.goal*160,plan});
  save();render();toast("Цель добавлена из календаря");
 }
 
@@ -658,7 +611,7 @@ function render(){
  renderModeOptions();
  renderStats();renderActive();renderAI();renderCalendar();renderLogs();renderTargets();renderTargetPicker();
  EL.date.value=selected;EL.dateLabel.textContent=selected;
- EL.setgems.value=d.gems;EL.setpity.value=d.pity;EL.setguar.value=String(d.guarantee);EL.setWeaponPity.value=d.weaponPity;EL.setWeaponGuar.value=String(d.weaponGuarantee);
+ EL.setgems.value=d.gems;EL.setpity.value=d.pity;EL.setguar.value=String(d.guarantee);
  EL.considerRow.style.display=isEffectivelyCurrent(currentBanner())?"none":"flex";
  EL.considerCurrent.checked=!!d.considerCurrent;
  renderCurrentNote();
@@ -674,21 +627,20 @@ function addLog(){
  if(type==="earn"&&g<=0)return toast("Укажи гемы");
  if(type==="spend"&&p<=0)return toast("Укажи крутки");
  if(type==="earn")d.gems+=g;
- if(type==="spend"){d.gems=Math.max(0,d.gems-p*160);if(EL.pullType.value==="weapon")d.weaponPity=(d.weaponPity+p)%80;else d.pity=(d.pity+p)%90}
+ if(type==="spend"){d.gems=Math.max(0,d.gems-p*160);d.pity=(d.pity+p)%90}
  if(type==="adjust")d.gems+=g;
- d.logs.push({id:Date.now(),date:EL.date.value,type,gems:g,pulls:p,pullType:type==="spend"?EL.pullType.value:null,title:EL.title.value,note:EL.note.value});
+ d.logs.push({id:Date.now(),date:EL.date.value,type,gems:g,pulls:p,title:EL.title.value,note:EL.note.value});
  save();
  EL.amount.value="";EL.pullamount.value=0;EL.title.value="";EL.note.value="";
  render();toast("Запись добавлена");
 }
 EL.amount.addEventListener("input",()=>{EL.pullamount.value=Math.floor((+EL.amount.value||0)/160)});
 EL.pullamount.addEventListener("input",()=>{EL.amount.value=(+EL.pullamount.value||0)*160});
-function spend(p,pullType="character"){
+function spend(p){
  let date=EL.date.value;
  if(d.gems<p*160)return toast("Недостаточно примогемов");
- d.gems-=p*160;
- if(pullType==="weapon")d.weaponPity=(d.weaponPity+p)%80;else d.pity=(d.pity+p)%90;
- d.logs.push({id:Date.now(),date,type:"spend",gems:0,pulls:p,pullType,title:`Потрачено ${p} круток · ${pullType==="weapon"?"сигна":"персонаж"}`,note:"Быстрая трата"});
+ d.gems-=p*160;d.pity=(d.pity+p)%90;
+ d.logs.push({id:Date.now(),date,type:"spend",gems:0,pulls:p,title:`Потрачено ${p} круток`,note:"Быстрая трата"});
  save();render();toast(`−${p} круток`);
 }
 function quickEarn(amount,title,note){
@@ -700,15 +652,13 @@ function quickEarn(amount,title,note){
 function delLog(id){
  let x=d.logs.find(a=>a.id===id);if(!x)return;
  if(x.type==="earn")d.gems-=x.gems;
- if(x.type==="spend"){d.gems+=x.pulls*160;if(x.pullType==="weapon")d.weaponPity=Math.max(0,d.weaponPity-x.pulls);else d.pity=Math.max(0,d.pity-x.pulls)}
+ if(x.type==="spend"){d.gems+=x.pulls*160;d.pity=Math.max(0,d.pity-x.pulls)}
  d.logs=d.logs.filter(a=>a.id!==id);save();render();
 }
 function saveAccount(){
  d.gems=Math.max(0,+EL.setgems.value||0);
  d.pity=Math.max(0,Math.min(89,+EL.setpity.value||0));
  d.guarantee=EL.setguar.value==="true";
- d.weaponPity=Math.max(0,Math.min(79,+EL.setWeaponPity.value||0));
- d.weaponGuarantee=EL.setWeaponGuar.value==="true";
  save();render();toast("Сохранено");
 }
 function setMode(x){d.mode=x;save();render()}
